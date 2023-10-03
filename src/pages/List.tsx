@@ -30,10 +30,10 @@ import {
   useIonAlert,
   useIonToast,
   useIonViewWillEnter,
-} from '@ionic/react';
-import { addOutline, trashBinOutline } from 'ionicons/icons';
-import React, { useEffect, useRef, useState } from 'react';
-import './List.css';
+} from "@ionic/react";
+import { addOutline, trashBinOutline } from "ionicons/icons";
+import React, { useEffect, useRef, useState } from "react";
+import "./List.css";
 const List: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [users, setUsers] = useState<any[]>([]);
@@ -42,10 +42,11 @@ const List: React.FC = () => {
   const [selectedUser, setSelectedUser] = useState<any>(null);
   const modal = useRef<HTMLIonModalElement>(null);
   const cardModal = useRef<HTMLIonModalElement>(null);
-  const [presentingElement, setPresentingElement] = useState<HTMLElement | null>(null);
+  const [presentingElement, setPresentingElement] =
+    useState<HTMLElement | null>(null);
   const page = useRef(null);
 
-  const [activeSegment, setActiveSegment] = useState<any>('details');
+  const [activeSegment, setActiveSegment] = useState<any>("details");
 
   useEffect(() => {
     setPresentingElement(page.current);
@@ -53,31 +54,31 @@ const List: React.FC = () => {
 
   useIonViewWillEnter(async () => {
     const users = await getUsers();
-    console.log('🚀 ~ file: List.tsx:10 ~ useIonViewWillEnter ~ users:', users);
+    console.log("🚀 ~ file: List.tsx:10 ~ useIonViewWillEnter ~ users:", users);
     setUsers(users);
     setLoading(false);
   });
 
   const getUsers = async () => {
-    const data = await fetch('https://randomuser.me/api?results=10');
+    const data = await fetch("https://randomuser.me/api?results=10");
     const users = await data.json();
     return users.results;
   };
 
   const clearList = () => {
     showAlert({
-      header: 'Confirm!',
-      message: 'Are you sure you want to delete all users?',
+      header: "Confirm!",
+      message: "Are you sure you want to delete all users?",
       buttons: [
-        { text: 'Cancel', role: 'cancel' },
+        { text: "Cancel", role: "cancel" },
         {
-          text: 'Delete',
+          text: "Delete",
           handler: () => {
             setUsers([]);
             showToast({
-              message: 'All users deleted',
+              message: "All users deleted",
               duration: 2000,
-              color: 'danger',
+              color: "danger",
             });
           },
         },
@@ -94,19 +95,23 @@ const List: React.FC = () => {
   return (
     <IonPage ref={page}>
       <IonHeader>
-        <IonToolbar color={'success'}>
+        <IonToolbar color={"success"}>
           <IonButtons slot="start">
             <IonMenuButton />
           </IonButtons>
           <IonTitle>List</IonTitle>
           <IonButtons slot="end">
             <IonButton onClick={clearList}>
-              <IonIcon slot="icon-only" icon={trashBinOutline} color={'light'} />
+              <IonIcon
+                slot="icon-only"
+                icon={trashBinOutline}
+                color={"light"}
+              />
             </IonButton>
           </IonButtons>
         </IonToolbar>
 
-        <IonToolbar color={'success'}>
+        <IonToolbar color={"success"}>
           <IonSearchbar />
         </IonToolbar>
       </IonHeader>
@@ -124,12 +129,12 @@ const List: React.FC = () => {
                     <IonSkeletonText />
                   </IonAvatar>
                   <IonLabel>
-                    <IonSkeletonText animated style={{ width: '150px' }} />
+                    <IonSkeletonText animated style={{ width: "150px" }} />
                     <p>
                       <IonSkeletonText />
                     </p>
                   </IonLabel>
-                  <IonChip slot="end" color={'primary'}></IonChip>
+                  <IonChip slot="end" color={"primary"}></IonChip>
                 </IonItem>
               </IonCardContent>
             </IonCard>
@@ -146,7 +151,7 @@ const List: React.FC = () => {
                   {user.name.first} {user.name.last}
                   <p>{user.email}</p>
                 </IonLabel>
-                <IonChip slot="end" color={'primary'}>
+                <IonChip slot="end" color={"primary"}>
                   {user.nat}
                 </IonChip>
               </IonItem>
@@ -154,25 +159,36 @@ const List: React.FC = () => {
           </IonCard>
         ))}
 
-        <IonModal breakpoints={[0, 0.5, 0.8]} initialBreakpoint={0.5} ref={modal} isOpen={selectedUser !== null} onIonModalDidDismiss={() => setSelectedUser(null)}>
+        <IonModal
+          breakpoints={[0, 0.5, 0.8]}
+          initialBreakpoint={0.5}
+          ref={modal}
+          isOpen={selectedUser !== null}
+          onIonModalDidDismiss={() => setSelectedUser(null)}
+        >
           <IonHeader>
-            <IonToolbar color={'light'}>
+            <IonToolbar color={"light"}>
               <IonButtons slot="start">
-                <IonButton onClick={() => modal.current?.dismiss()}>Close</IonButton>
+                <IonButton onClick={() => modal.current?.dismiss()}>
+                  Close
+                </IonButton>
               </IonButtons>
               <IonTitle>
                 {selectedUser?.name.first} {selectedUser?.name.last}
               </IonTitle>
             </IonToolbar>
-            <IonToolbar color={'light'}>
-              <IonSegment value={activeSegment} onIonChange={(e) => setActiveSegment(e.detail.value!)}>
+            <IonToolbar color={"light"}>
+              <IonSegment
+                value={activeSegment}
+                onIonChange={(e) => setActiveSegment(e.detail.value!)}
+              >
                 <IonSegmentButton value="details">Details</IonSegmentButton>
                 <IonSegmentButton value="calendar">Calendar</IonSegmentButton>
               </IonSegment>
             </IonToolbar>
           </IonHeader>
           <IonContent className="ion-padding">
-            {activeSegment === 'details' && (
+            {activeSegment === "details" && (
               <IonCard>
                 <IonAvatar slot="start">
                   <IonImg src={selectedUser?.picture.large} />
@@ -187,16 +203,22 @@ const List: React.FC = () => {
                 </IonCardContent>
               </IonCard>
             )}
-            {activeSegment === 'calendar' && <IonDatetime />}
+            {activeSegment === "calendar" && <IonDatetime />}
           </IonContent>
         </IonModal>
       </IonContent>
 
-      <IonModal ref={cardModal} trigger="card-modal" presentingElement={presentingElement!}>
+      <IonModal
+        ref={cardModal}
+        trigger="card-modal"
+        presentingElement={presentingElement!}
+      >
         <IonHeader>
-          <IonToolbar color={'success'}>
+          <IonToolbar color={"success"}>
             <IonButtons slot="start">
-              <IonButton onClick={() => cardModal.current?.dismiss()}>Close</IonButton>
+              <IonButton onClick={() => cardModal.current?.dismiss()}>
+                Close
+              </IonButton>
             </IonButtons>
             <IonTitle>Card Modal</IonTitle>
           </IonToolbar>

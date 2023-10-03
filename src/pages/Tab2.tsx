@@ -1,5 +1,19 @@
-import { CreateAnimation, Gesture, GestureDetail, IonButton, IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar, createGesture, useIonViewDidEnter } from '@ionic/react';
-import React, { useRef } from 'react';
+import {
+  CreateAnimation,
+  Gesture,
+  GestureDetail,
+  IonButton,
+  IonButtons,
+  IonContent,
+  IonHeader,
+  IonMenuButton,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+  createGesture,
+  useIonViewDidEnter,
+} from "@ionic/react";
+import React, { useRef } from "react";
 
 const Tab2: React.FC = () => {
   const animationRef = useRef<CreateAnimation | null>(null);
@@ -10,7 +24,7 @@ const Tab2: React.FC = () => {
     const gesture: Gesture = createGesture({
       el: elementRef.current!,
       threshold: 0,
-      gestureName: 'my-gesture',
+      gestureName: "my-gesture",
       onStart: (ev) => onStartHandler(ev),
       onMove: (ev) => onMoveHandler(ev),
       onEnd: (ev) => onMoveEnd(ev),
@@ -19,7 +33,7 @@ const Tab2: React.FC = () => {
   });
 
   const onStartHandler = (detail: GestureDetail) => {
-    elementRef.current!.style.transition = 'none';
+    elementRef.current!.style.transition = "none";
   };
 
   const onMoveHandler = (detail: GestureDetail) => {
@@ -30,14 +44,14 @@ const Tab2: React.FC = () => {
   };
 
   const onMoveEnd = (detail: GestureDetail) => {
-    elementRef.current!.style.transition = '500ms ease-out';
+    elementRef.current!.style.transition = "500ms ease-out";
     elementRef.current!.style.transform = `translate(0px, 0px)`;
   };
 
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar color={'success'}>
+        <IonToolbar color={"success"}>
           <IonButtons slot="start">
             <IonMenuButton />
           </IonButtons>
@@ -51,16 +65,20 @@ const Tab2: React.FC = () => {
           iterations={Infinity}
           delay={1000}
           keyframes={[
-            { offset: 0, transform: 'scale(1)', opacity: '1' },
-            { offset: 0.5, transform: 'scale(1.5)', opacity: '0.5' },
-            { offset: 1, transform: 'scale(1)', opacity: '1' },
-          ]}>
-          <IonButton expand="block" color={'success'} className="ion-margin">
+            { offset: 0, transform: "scale(1)", opacity: "1" },
+            { offset: 0.5, transform: "scale(1.5)", opacity: "0.5" },
+            { offset: 1, transform: "scale(1)", opacity: "1" },
+          ]}
+        >
+          <IonButton expand="block" color={"success"} className="ion-margin">
             Join Ionic Academy
           </IonButton>
         </CreateAnimation>
 
-        <div ref={elementRef} style={{ width: 50, height: 50, backgroundColor: 'red' }} />
+        <div
+          ref={elementRef}
+          style={{ width: 50, height: 50, backgroundColor: "red" }}
+        />
       </IonContent>
     </IonPage>
   );

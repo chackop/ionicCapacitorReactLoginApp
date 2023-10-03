@@ -1,28 +1,45 @@
-import { IonButton, IonContent, IonHeader, IonIcon, IonItem, IonMenu, IonMenuToggle, IonPage, IonRouterOutlet, IonSplitPane, IonTitle, IonToolbar } from '@ionic/react';
-import React from 'react';
-import { Redirect, Route } from 'react-router';
-import List from './List';
-import Settings from './Settings';
-import { homeOutline, logOutOutline, newspaperOutline } from 'ionicons/icons';
+import {
+  IonButton,
+  IonContent,
+  IonHeader,
+  IonIcon,
+  IonItem,
+  IonMenu,
+  IonMenuToggle,
+  IonPage,
+  IonRouterOutlet,
+  IonSplitPane,
+  IonTitle,
+  IonToolbar,
+} from "@ionic/react";
+import React from "react";
+import { Redirect, Route } from "react-router";
+import List from "./List";
+import Settings from "./Settings";
+import { homeOutline, logOutOutline, newspaperOutline } from "ionicons/icons";
 
 const Menu: React.FC = () => {
   const paths = [
-    { name: 'Home', url: '/app/list', icon: homeOutline },
-    { name: 'Settings', url: '/app/settings', icon: newspaperOutline },
+    { name: "Home", url: "/app/list", icon: homeOutline },
+    { name: "Settings", url: "/app/settings", icon: newspaperOutline },
   ];
   return (
     <IonPage>
       <IonSplitPane contentId="main">
         <IonMenu contentId="main">
           <IonHeader>
-            <IonToolbar color={'secondary'}>
+            <IonToolbar color={"secondary"}>
               <IonTitle>Menu</IonTitle>
             </IonToolbar>
           </IonHeader>
           <IonContent>
             {paths.map((item, index) => (
               <IonMenuToggle key={index} autoHide={false}>
-                <IonItem detail={true} routerLink={item.url} routerDirection="none">
+                <IonItem
+                  detail={true}
+                  routerLink={item.url}
+                  routerDirection="none"
+                >
                   <IonIcon slot="start" icon={item.icon} />
                   {item.name}
                 </IonItem>

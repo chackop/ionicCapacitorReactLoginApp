@@ -1,6 +1,15 @@
-import { Camera, CameraResultType } from '@capacitor/camera';
-import { IonButton, IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import React, { useState } from 'react';
+import { Camera, CameraResultType } from "@capacitor/camera";
+import {
+  IonButton,
+  IonButtons,
+  IonContent,
+  IonHeader,
+  IonMenuButton,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+} from "@ionic/react";
+import React, { useState } from "react";
 
 const Tab1: React.FC = () => {
   const [image, setImage] = useState<any>(null);
@@ -19,7 +28,7 @@ const Tab1: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar color={'success'}>
+        <IonToolbar color={"success"}>
           <IonButtons slot="start">
             <IonMenuButton />
           </IonButtons>
